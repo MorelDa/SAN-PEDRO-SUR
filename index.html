@@ -5,14 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="referrer" content="no-referrer">
     
-    <title>SAN PEDRO SUR - PORTAL RADIO</title>
+    <title>SAN PEDRO SUR - RADIO ONLINE</title>
     
-    <!-- Meta para Redes Sociales -->
-    <meta property="og:title" content="SAN PEDRO SUR - RADIO ONLINE">
-    <meta property="og:description" content="PORTAL SAN PEDRO SUR RADIO ONLINE TE COMUNICA CON OSCAR VERA AL MANDO">
-    <meta property="og:image" content="https://i.postimg.cc/RZ1CjTmC/Mesa-de-trabajo-1.png">
-    
-    <link rel="shortcut icon" href="https://i.postimg.cc/RZ1CjTmC/Mesa-de-trabajo-1.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap" rel="stylesheet">
     
@@ -27,7 +21,6 @@
             justify-content: center;
             font-family: 'Montserrat', sans-serif;
             text-align: center;
-            overflow: hidden;
         }
 
         .container { width: 90%; max-width: 350px; }
@@ -37,12 +30,12 @@
             height: 250px;
             border: 6px solid #ff8c00;
             border-radius: 15px;
-            box-shadow: 0 0 40px rgba(0,0,0,0.7);
+            box-shadow: 0 0 40px rgba(0,0,0,0.8);
             margin-bottom: 20px;
         }
 
-        h1 { font-size: 1.5rem; margin: 5px 0; text-transform: uppercase; }
-        .sub { font-size: 0.8rem; letter-spacing: 2px; color: #ff8c00; margin-bottom: 30px; }
+        h1 { font-size: 1.5rem; margin: 5px 0; text-transform: uppercase; text-shadow: 2px 2px 5px #000; }
+        .sub { font-size: 0.8rem; letter-spacing: 2px; color: #ff8c00; margin-bottom: 30px; font-weight: bold; }
 
         .play-btn {
             width: 90px;
@@ -51,11 +44,10 @@
             border: none;
             border-radius: 50%;
             cursor: pointer;
-            box-shadow: 0 0 20px rgba(255,140,0,0.4);
+            box-shadow: 0 0 25px rgba(255,140,0,0.5);
             transition: 0.2s;
         }
 
-        .play-btn:active { transform: scale(0.9); }
         .play-btn i { color: #fff; font-size: 2.5rem; }
 
         .social { display: flex; justify-content: center; gap: 30px; margin-top: 30px; }
@@ -64,73 +56,83 @@
         .oscar-vera {
             font-size: 10px;
             margin-top: 25px;
-            opacity: 0.7;
+            opacity: 0.8;
             text-transform: uppercase;
+            line-height: 1.5;
         }
 
-        #status { font-size: 12px; margin-bottom: 10px; height: 15px; color: #ff8c00; font-weight: bold; }
+        #status { font-size: 11px; margin-bottom: 10px; height: 15px; color: #ff8c00; font-weight: bold; letter-spacing: 1px; }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <div id="status">LISTO PARA TRANSMITIR</div>
+        <div id="status">PORTAL SAN PEDRO SUR</div>
         
         <img src="https://i.postimg.cc/RZ1CjTmC/Mesa-de-trabajo-1.png" class="logo">
         
         <h1>SAN PEDRO SUR</h1>
-        <p class="sub">PORTAL RADIO ONLINE</p>
+        <p class="sub">RADIO ONLINE</p>
 
         <button class="play-btn" onclick="toggleAudio()">
-            <i class="fas fa-play" id="icon"></i>
+            <i class="fas fa-play" id="icon" style="margin-left: 5px;"></i>
         </button>
 
         <div class="social">
-            <a href="https://www.facebook.com/share/1CxK3snQrr/"><i class="fab fa-facebook-f"></i></a>
-            <a href="https://www.tiktok.com/@portalsanpedrosurpy"><i class="fab fa-tiktok"></i></a>
-            <a href="https://wa.me/595986436870"><i class="fab fa-whatsapp"></i></a>
+            <a href="https://www.facebook.com/share/1CxK3snQrr/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.tiktok.com/@portalsanpedrosurpy" target="_blank"><i class="fab fa-tiktok"></i></a>
+            <a href="https://wa.me/595986436870" target="_blank"><i class="fab fa-whatsapp"></i></a>
         </div>
 
         <p class="oscar-vera">
-            PORTAL SAN PEDRO SUR RADIO ONLINE<br>
-            TE COMUNICA CON OSCAR VERA AL MANDO
+            PORTAL RADIO ONLINE<br>
+            CON OSCAR VERA AL MANDO
         </p>
     </div>
 
-    <audio id="radio"></audio>
+    <!-- El secreto está en preload="auto" y quitar controles innecesarios -->
+    <audio id="radio" preload="auto" crossorigin="anonymous"></audio>
 
     <script>
         var audio = document.getElementById("radio");
         var icon = document.getElementById("icon");
         var statusText = document.getElementById("status");
         
-        // URL DIRECTA SIN REDIRECCIONES
         var streamUrl = "https://fpsnew1.listen2myradio.com:2199/listen.php?ip=82.145.63.6&port=11054&type=s2&mount=1";
 
         function toggleAudio() {
             if (audio.paused) {
-                statusText.innerText = "SINTONIZANDO...";
-                // Forzamos al navegador a tratarlo como audio fresco
-                audio.src = streamUrl + "&nocache=" + Date.now();
-                audio.load();
+                statusText.innerText = "SINTONIZANDO SEÑAL...";
                 
-                var start = audio.play();
-                if (start !== undefined) {
-                    start.then(_ => {
-                        icon.className = "fas fa-pause";
-                        statusText.innerText = "🔴 EN VIVO";
-                    }).catch(err => {
-                        statusText.innerText = "ERROR DE CONEXIÓN";
-                        console.log(err);
-                    });
-                }
+                // Forzamos la limpieza del stream anterior
+                audio.src = streamUrl + "&1=" + Math.random();
+                
+                // Ajuste para móviles: esperar un poco antes de sonar para llenar el buffer
+                audio.play().then(_ => {
+                    icon.className = "fas fa-pause";
+                    icon.style.marginLeft = "0px";
+                    statusText.innerText = "🔴 EN VIVO";
+                }).catch(err => {
+                    statusText.innerText = "ERROR DE SEÑAL";
+                });
             } else {
                 audio.pause();
+                // Importante: vaciar el src al pausar para que no siga consumiendo datos en el móvil
                 audio.src = "";
                 icon.className = "fas fa-play";
-                statusText.innerText = "RADIO APAGADA";
+                icon.style.marginLeft = "5px";
+                statusText.innerText = "PAUSADO";
             }
         }
+
+        // Si el móvil detecta pérdida de datos, intenta reconectar automáticamente sin cortar
+        audio.addEventListener('waiting', () => {
+            statusText.innerText = "CARGANDO BUFFER...";
+        });
+
+        audio.addEventListener('playing', () => {
+            statusText.innerText = "🔴 EN VIVO";
+        });
     </script>
 </body>
 </html>
