@@ -2,157 +2,211 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="referrer" content="no-referrer">
-    
-    <title>SAN PEDRO SUR - RADIO ONLINE</title>
-    
-    <!-- Configuración para Redes Sociales -->
-    <meta property="og:title" content="SAN PEDRO SUR - RADIO ONLINE">
-    <meta property="og:description" content="PORTAL SAN PEDRO SUR RADIO ONLINE TE COMUNICA CON OSCAR VERA AL MANDO">
-    <meta property="og:image" content="https://i.postimg.cc/RZ1CjTmC/Mesa-de-trabajo-1.png">
-    
-    <link rel="shortcut icon" href="https://i.postimg.cc/RZ1CjTmC/Mesa-de-trabajo-1.png">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap" rel="stylesheet">
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Radio Party | ¡Siente el Ritmo!</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
+        :root {
+            --primary: #ff007a;
+            --secondary: #00d4ff;
+            --dark: #0f0f1b;
+            --light: #ffffff;
+        }
+
         body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--dark);
+            color: var(--light);
             margin: 0;
-            background: radial-gradient(circle, #d35400 0%, #000000 100%);
-            color: #fff;
-            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--primary);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .main-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        /* Reproductor Estilizado */
+        .player-card {
+            background: linear-gradient(145deg, #1a1a2e, #16213e);
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            max-width: 400px;
+            width: 100%;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .status {
+            color: var(--secondary);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-family: 'Montserrat', sans-serif;
-            text-align: center;
-            overflow: hidden;
+            gap: 10px;
         }
 
-        .container { width: 90%; max-width: 350px; z-index: 10; }
-
-        .logo {
-            width: 250px;
-            height: 250px;
-            border: 6px solid #ff8c00;
-            border-radius: 15px;
-            box-shadow: 0 0 40px rgba(0,0,0,0.8);
-            margin-bottom: 20px;
-            object-fit: cover;
-        }
-
-        h1 { font-size: 1.5rem; margin: 5px 0; text-transform: uppercase; text-shadow: 2px 2px 5px #000; }
-        .sub { font-size: 0.8rem; letter-spacing: 2px; color: #ff8c00; margin-bottom: 30px; font-weight: bold; }
-
-        .play-btn {
-            width: 90px;
-            height: 90px;
-            background: #ff8c00;
-            border: none;
+        .pulse {
+            width: 10px;
+            height: 10px;
+            background: var(--secondary);
             border-radius: 50%;
-            cursor: pointer;
-            box-shadow: 0 0 25px rgba(255,140,0,0.5);
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            transition: transform 0.1s ease;
-        }
-        
-        .play-btn:active { transform: scale(0.9); }
-        .play-btn i { color: #fff; font-size: 2.5rem; }
-
-        .social { display: flex; justify-content: center; gap: 30px; margin-top: 30px; }
-        .social a { color: #fff; font-size: 1.8rem; text-decoration: none; }
-
-        .oscar-vera {
-            font-size: 10px;
-            margin-top: 25px;
-            opacity: 0.8;
-            text-transform: uppercase;
-            line-height: 1.5;
+            animation: pulse-animation 2s infinite;
         }
 
-        #status {
-            font-size: 11px;
-            margin-bottom: 10px;
-            height: 15px;
-            color: #ff8c00;
-            font-weight: bold;
-            letter-spacing: 1px;
+        @keyframes pulse-animation {
+            0% { box-shadow: 0 0 0 0px rgba(0, 212, 255, 0.4); }
+            100% { box-shadow: 0 0 0 15px rgba(0, 212, 255, 0); }
+        }
+
+        audio {
+            width: 100%;
+            margin: 20px 0;
+            filter: invert(100%) hue-rotate(180deg) brightness(1.5);
+        }
+
+        /* Secciones de Contenido */
+        .content-sections {
+            width: 90%;
+            max-width: 1000px;
+            margin-top: 3rem;
+        }
+
+        .section-title {
+            border-left: 4px solid var(--primary);
+            padding-left: 15px;
+            margin: 2rem 0;
+            text-align: left;
+        }
+
+        .viral-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .viral-item {
+            background: #1a1a2e;
+            padding: 15px;
+            border-radius: 10px;
+            transition: transform 0.3s;
+        }
+
+        .viral-item:hover {
+            transform: translateY(-5px);
+            background: #252545;
+        }
+
+        footer {
+            background: #05050a;
+            padding: 2rem;
+            margin-top: auto;
+            text-align: center;
+        }
+
+        .social-links {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .social-links a {
+            color: var(--light);
+            margin: 0 15px;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: var(--primary);
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <div id="status">PORTAL SAN PEDRO SUR</div>
-        
-        <img src="https://i.postimg.cc/RZ1CjTmC/Mesa-de-trabajo-1.png" class="logo">
-        
-        <h1>SAN PEDRO SUR</h1>
-        <p class="sub">RADIO ONLINE</p>
+    <header>
+        <div class="logo"><i class="fas fa-compact-disc"></i> Radio Party</div>
+        <nav>
+            <i class="fas fa-tv" title="Televisión"></i> 
+            <span style="margin: 0 15px;">|</span>
+            <i class="fas fa-share-alt" title="Redes Sociales"></i>
+        </nav>
+    </header>
 
-        <button class="play-btn" onclick="togglePlay()">
-            <i class="fas fa-play" id="iconUI" style="margin-left: 5px;"></i>
-        </button>
+    <main class="main-container">
+        <div class="player-card">
+            <div class="status">
+                <div class="pulse"></div> EN VIVO AHORA
+            </div>
+            <h1 style="margin: 0;">Radio Party</h1>
+            <p style="opacity: 0.7;">La música que mueve tu mundo</p>
+            
+            <audio controls autoplay>
+                <source src="https://morcast.caster.fm:14697/DHGZf?token=53af68f11fa8c97d354847aa7df48167" type="audio/mpeg">
+                Tu navegador no soporta el elemento de audio.
+            </audio>
 
-        <div class="social">
-            <a href="https://www.facebook.com/share/1CxK3snQrr/" target="_blank"><i class="fab fa-facebook-f"></i></a>
-            <a href="https://www.tiktok.com/@portalsanpedrosurpy" target="_blank"><i class="fab fa-tiktok"></i></a>
-            <a href="https://wa.me/595986436870" target="_blank"><i class="fab fa-whatsapp"></i></a>
+            <div style="font-size: 0.8rem; opacity: 0.5;">
+                Stream: morcast.caster.fm
+            </div>
         </div>
 
-        <p class="oscar-vera">
-            PORTAL RADIO ONLINE<br>
-            CON OSCAR VERA AL MANDO
-        </p>
-    </div>
+        <section class="content-sections">
+            <div class="section-title">
+                <h2><i class="fas fa-fire"></i> Lo más viral</h2>
+            </div>
+            <div class="viral-grid" id="viral-container">
+                <!-- Los 100 temas virales se cargarían aquí dinámicamente -->
+                <div class="viral-item">#Top 1: Trending Topic</div>
+                <div class="viral-item">#Top 2: Nuevo Hit Verano</div>
+                <div class="viral-item">#Top 3: Festival 2026</div>
+                <div class="viral-item">#Top 4: Podcast del Día</div>
+            </div>
+        </section>
+    </main>
 
-    <!-- REPRODUCTOR -->
-    <audio id="audioPlayer" preload="none" crossorigin="anonymous"></audio>
+    <footer>
+        <div class="social-links">
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-tiktok"></i></a>
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+        </div>
+        <p>&copy; 2026 Radio Party - Todos los derechos reservados.</p>
+    </footer>
 
     <script>
-        const audio = document.getElementById('audioPlayer');
-        const icon = document.getElementById('iconUI');
-        const status = document.getElementById('status');
-        
-        // Nueva URL de Caster.fm
-        const streamUrl = "https://morcast.caster.fm:14697/DHGZf?token=53af68f11fa8c97d354847aa7df48167";
-
-        function togglePlay() {
-            if (audio.paused) {
-                status.innerText = "SINTONIZANDO...";
-                
-                // Forzamos la URL para evitar cortes
-                audio.src = streamUrl;
-                audio.load();
-                
-                audio.play().then(() => {
-                    status.innerText = "🔴 EN VIVO";
-                    icon.className = "fas fa-pause";
-                    icon.style.marginLeft = "0px";
-                }).catch(err => {
-                    status.innerText = "SERVIDOR DESCONECTADO";
-                    console.error("Error:", err);
-                });
-            } else {
-                audio.pause();
-                audio.src = ""; // Detiene la descarga de datos
-                status.innerText = "RADIO DETENIDA";
-                icon.className = "fas fa-play";
-                icon.style.marginLeft = "5px";
-            }
+        // Función para simular la carga de los 100 temas virales
+        const container = document.getElementById('viral-container');
+        for (let i = 5; i <= 20; i++) {
+            const div = document.createElement('div');
+            div.className = 'viral-item';
+            div.innerText = `#Top ${i}: Tema Viral `;
+            container.appendChild(div);
         }
-
-        // Si el servidor corta la conexión, reintentar automáticamente
-        audio.onerror = function() {
-            if(!audio.paused) {
-                status.innerText = "RECUPERANDO SEÑAL...";
-                setTimeout(togglePlay, 2000);
-            }
-        };
     </script>
-
 </body>
 </html>
