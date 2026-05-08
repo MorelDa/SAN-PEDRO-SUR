@@ -7,14 +7,13 @@
     <!-- TÉCNICA PARA EVITAR BLOQUEO DE RED -->
     <meta name="referrer" content="no-referrer">
     
-    <!-- CONFIGURACIÓN PARA REDES SOCIALES (Al compartir el link) -->
+    <!-- CONFIGURACIÓN PARA REDES SOCIALES -->
     <title>SAN PEDRO SUR - PORTAL RADIO ONLINE</title>
     <meta property="og:title" content="SAN PEDRO SUR - RADIO ONLINE">
     <meta property="og:description" content="PORTAL SAN PEDRO SUR RADIO ONLINE TE COMUNICA CON OSCAR VERA AL MANDO">
     <meta property="og:image" content="https://i.postimg.cc/RZ1CjTmC/Mesa-de-trabajo-1.png">
     <meta property="og:type" content="website">
     
-    <!-- Icono de pestaña -->
     <link rel="shortcut icon" href="https://i.postimg.cc/RZ1CjTmC/Mesa-de-trabajo-1.png" type="image/x-icon">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -29,7 +28,6 @@
         }
 
         body {
-            /* Fondo naranja y negro */
             background: radial-gradient(circle at center, #d35400 0%, #000000 100%);
             color: #fff;
             height: 100vh;
@@ -56,7 +54,6 @@
             padding: 20px;
         }
 
-        /* LOGO CUADRADO ROBUSTO */
         .logo-box {
             width: 270px;
             height: 270px;
@@ -68,7 +65,6 @@
             display: block;
         }
 
-        /* TÍTULOS ROBUSTOS */
         h1 {
             font-size: 1.6rem;
             font-weight: 900;
@@ -88,7 +84,6 @@
             opacity: 0.9;
         }
 
-        /* BOTÓN NARANJA */
         .play-btn {
             width: 85px;
             height: 85px;
@@ -108,7 +103,6 @@
         .play-btn i { color: #fff; font-size: 2.2rem; }
         .icon-play { margin-left: 6px; }
 
-        /* REDES SOCIALES */
         .social-menu {
             display: flex;
             justify-content: center;
@@ -120,17 +114,14 @@
             color: #fff;
             font-size: 1.8rem;
             text-decoration: none;
-            transition: 0.2s;
         }
 
-        /* TEXTO OSCAR VERA */
         .info-oscar {
             font-size: 0.65rem;
             color: rgba(255,255,255,0.7);
             line-height: 1.4;
             text-transform: uppercase;
             letter-spacing: 1px;
-            font-weight: 400;
         }
 
         #status {
@@ -147,7 +138,7 @@
     <div class="bg-pattern"></div>
 
     <div class="container">
-        <div id="status">PULSA PLAY PARA ESCUCHAR</div>
+        <div id="status">PORTAL RADIO ONLINE</div>
         
         <img src="https://i.postimg.cc/RZ1CjTmC/Mesa-de-trabajo-1.png" class="logo-box" alt="Radio Logo">
         
@@ -170,7 +161,7 @@
         </p>
     </div>
 
-    <!-- REPRODUCTOR DE AUDIO -->
+    <!-- AUDIO CON LA NUEVA URL -->
     <audio id="player" crossorigin="anonymous"></audio>
 
     <script>
@@ -179,15 +170,15 @@
         const icon = document.getElementById('iconUI');
         const status = document.getElementById('status');
         
-        // URL de tu radio (La más reciente que pasaste)
-        const streamUrl = "https://uk24freenew.listen2myradio.com/live.mp3?typeportmount=s2_24125_stream_277622171";
+        // NUEVA URL DEL SERVIDOR
+        const streamUrl = "https://fpsnew1.listen2myradio.com:2199/listen.php?ip=82.145.63.6&port=11054&type=s2&mount=1";
 
         btn.onclick = () => {
             if (audio.paused) {
                 status.innerText = "SINTONIZANDO...";
                 
-                // Agregamos un bypass de caché para intentar forzar la conexión
-                audio.src = streamUrl + "&cb=" + Math.random();
+                // Agregamos parámetro para evitar caché
+                audio.src = streamUrl + "&t=" + new Date().getTime();
                 audio.load();
                 
                 const playPromise = audio.play();
@@ -198,25 +189,20 @@
                         icon.className = 'fas fa-pause';
                         icon.classList.remove('icon-play');
                     }).catch(error => {
-                        status.innerText = "ERROR DE CONEXIÓN O BLOQUEO";
-                        console.error("Error al reproducir:", error);
+                        status.innerText = "ERROR: SERVIDOR NO DISPONIBLE";
+                        console.error("Error:", error);
                     });
                 }
             } else {
                 audio.pause();
                 audio.src = ""; 
                 icon.className = 'fas fa-play icon-play';
-                status.innerText = "RADIO APAGADA";
+                status.innerText = "CONEXIÓN FINALIZADA";
             }
         };
 
-        // Si el servidor desconecta, intentar recargar
         audio.onerror = () => {
-            if(!audio.paused) {
-                status.innerText = "RECONECTANDO...";
-                audio.load();
-                audio.play();
-            }
+            status.innerText = "REINTENTANDO CONEXIÓN...";
         };
     </script>
 </body>
