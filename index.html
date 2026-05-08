@@ -4,20 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     
-    <!-- CONFIGURACIÓN PARA REDES SOCIALES -->
+    <!-- TÉCNICA PARA EVITAR BLOQUEO DE RED -->
+    <meta name="referrer" content="no-referrer">
+    
+    <!-- CONFIGURACIÓN PARA REDES SOCIALES (Al compartir el link) -->
     <title>SAN PEDRO SUR - PORTAL RADIO ONLINE</title>
     <meta property="og:title" content="SAN PEDRO SUR - RADIO ONLINE">
     <meta property="og:description" content="PORTAL SAN PEDRO SUR RADIO ONLINE TE COMUNICA CON OSCAR VERA AL MANDO">
     <meta property="og:image" content="https://i.postimg.cc/RZ1CjTmC/Mesa-de-trabajo-1.png">
+    <meta property="og:type" content="website">
     
+    <!-- Icono de pestaña -->
     <link rel="shortcut icon" href="https://i.postimg.cc/RZ1CjTmC/Mesa-de-trabajo-1.png" type="image/x-icon">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap" rel="stylesheet">
     
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
 
         body {
+            /* Fondo naranja y negro */
             background: radial-gradient(circle at center, #d35400 0%, #000000 100%);
             color: #fff;
             height: 100vh;
@@ -44,6 +56,7 @@
             padding: 20px;
         }
 
+        /* LOGO CUADRADO ROBUSTO */
         .logo-box {
             width: 270px;
             height: 270px;
@@ -55,9 +68,27 @@
             display: block;
         }
 
-        h1 { font-size: 1.6rem; font-weight: 900; text-transform: uppercase; margin-bottom: 5px; }
-        .subtitle { font-size: 0.8rem; font-weight: 400; letter-spacing: 3px; color: #fff; margin-bottom: 30px; text-transform: uppercase; }
+        /* TÍTULOS ROBUSTOS */
+        h1 {
+            font-size: 1.6rem;
+            font-weight: 900;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+        }
 
+        .subtitle {
+            font-size: 0.8rem;
+            font-weight: 400;
+            letter-spacing: 3px;
+            color: #fff;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            opacity: 0.9;
+        }
+
+        /* BOTÓN NARANJA */
         .play-btn {
             width: 85px;
             height: 85px;
@@ -70,17 +101,45 @@
             cursor: pointer;
             margin-bottom: 30px;
             box-shadow: 0 0 30px rgba(255, 140, 0, 0.4);
+            transition: transform 0.1s ease;
         }
 
+        .play-btn:active { transform: scale(0.9); }
         .play-btn i { color: #fff; font-size: 2.2rem; }
         .icon-play { margin-left: 6px; }
 
-        .social-menu { display: flex; justify-content: center; gap: 35px; margin-bottom: 25px; }
-        .social-menu a { color: #fff; font-size: 1.8rem; text-decoration: none; }
+        /* REDES SOCIALES */
+        .social-menu {
+            display: flex;
+            justify-content: center;
+            gap: 35px;
+            margin-bottom: 25px;
+        }
 
-        .info-oscar { font-size: 0.65rem; color: rgba(255,255,255,0.7); line-height: 1.4; text-transform: uppercase; letter-spacing: 1px; }
+        .social-menu a {
+            color: #fff;
+            font-size: 1.8rem;
+            text-decoration: none;
+            transition: 0.2s;
+        }
 
-        #status { font-size: 0.7rem; margin-bottom: 10px; color: #ff8c00; font-weight: bold; height: 15px; }
+        /* TEXTO OSCAR VERA */
+        .info-oscar {
+            font-size: 0.65rem;
+            color: rgba(255,255,255,0.7);
+            line-height: 1.4;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 400;
+        }
+
+        #status {
+            font-size: 0.7rem;
+            margin-bottom: 10px;
+            color: #ff8c00;
+            font-weight: bold;
+            height: 15px;
+        }
     </style>
 </head>
 <body>
@@ -88,7 +147,7 @@
     <div class="bg-pattern"></div>
 
     <div class="container">
-        <div id="status">PULSA PLAY PARA CONECTAR</div>
+        <div id="status">PULSA PLAY PARA ESCUCHAR</div>
         
         <img src="https://i.postimg.cc/RZ1CjTmC/Mesa-de-trabajo-1.png" class="logo-box" alt="Radio Logo">
         
@@ -111,6 +170,7 @@
         </p>
     </div>
 
+    <!-- REPRODUCTOR DE AUDIO -->
     <audio id="player" crossorigin="anonymous"></audio>
 
     <script>
@@ -119,18 +179,18 @@
         const icon = document.getElementById('iconUI');
         const status = document.getElementById('status');
         
-        // Usamos la URL que pasaste (Ten en cuenta que el número final puede cambiar)
+        // URL de tu radio (La más reciente que pasaste)
         const streamUrl = "https://uk24freenew.listen2myradio.com/live.mp3?typeportmount=s2_24125_stream_277622171";
 
         btn.onclick = () => {
             if (audio.paused) {
-                status.innerText = "SINTONIZANDO SEÑAL...";
+                status.innerText = "SINTONIZANDO...";
                 
-                // IMPORTANTE: Recargar el SRC cada vez para evitar bloqueos de GitHub/Browser
-                audio.src = streamUrl + "&t=" + new Date().getTime(); 
+                // Agregamos un bypass de caché para intentar forzar la conexión
+                audio.src = streamUrl + "&cb=" + Math.random();
                 audio.load();
                 
-                var playPromise = audio.play();
+                const playPromise = audio.play();
 
                 if (playPromise !== undefined) {
                     playPromise.then(_ => {
@@ -138,8 +198,8 @@
                         icon.className = 'fas fa-pause';
                         icon.classList.remove('icon-play');
                     }).catch(error => {
-                        status.innerText = "ERROR: EL SERVIDOR BLOQUEÓ LA CONEXIÓN";
-                        console.log("Error:", error);
+                        status.innerText = "ERROR DE CONEXIÓN O BLOQUEO";
+                        console.error("Error al reproducir:", error);
                     });
                 }
             } else {
@@ -147,6 +207,15 @@
                 audio.src = ""; 
                 icon.className = 'fas fa-play icon-play';
                 status.innerText = "RADIO APAGADA";
+            }
+        };
+
+        // Si el servidor desconecta, intentar recargar
+        audio.onerror = () => {
+            if(!audio.paused) {
+                status.innerText = "RECONECTANDO...";
+                audio.load();
+                audio.play();
             }
         };
     </script>
