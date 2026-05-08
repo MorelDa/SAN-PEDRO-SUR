@@ -4,95 +4,155 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="referrer" content="no-referrer">
+    
     <title>SAN PEDRO SUR - RADIO ONLINE</title>
+    
+    <!-- Configuración para Redes Sociales -->
+    <meta property="og:title" content="SAN PEDRO SUR - RADIO ONLINE">
+    <meta property="og:description" content="PORTAL SAN PEDRO SUR RADIO ONLINE TE COMUNICA CON OSCAR VERA AL MANDO">
+    <meta property="og:image" content="https://i.postimg.cc/RZ1CjTmC/Mesa-de-trabajo-1.png">
+    
+    <link rel="shortcut icon" href="https://i.postimg.cc/RZ1CjTmC/Mesa-de-trabajo-1.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap" rel="stylesheet">
+    
     <style>
-        body { margin: 0; background: radial-gradient(circle, #d35400 0%, #000 100%); color: #fff; height: 100vh; display: flex; align-items: center; justify-content: center; font-family: 'Montserrat', sans-serif; text-align: center; }
-        .container { width: 90%; max-width: 350px; }
-        .logo { width: 250px; height: 250px; border: 6px solid #ff8c00; border-radius: 15px; box-shadow: 0 0 40px rgba(0,0,0,0.8); margin-bottom: 20px; }
-        h1 { font-size: 1.5rem; margin: 5px 0; text-transform: uppercase; }
-        .sub { font-size: 0.8rem; letter-spacing: 2px; color: #ff8c00; margin-bottom: 30px; }
-        .play-btn { width: 90px; height: 90px; background: #ff8c00; border: none; border-radius: 50%; cursor: pointer; box-shadow: 0 0 25px rgba(255,140,0,0.5); }
+        body {
+            margin: 0;
+            background: radial-gradient(circle, #d35400 0%, #000000 100%);
+            color: #fff;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Montserrat', sans-serif;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .container { width: 90%; max-width: 350px; z-index: 10; }
+
+        .logo {
+            width: 250px;
+            height: 250px;
+            border: 6px solid #ff8c00;
+            border-radius: 15px;
+            box-shadow: 0 0 40px rgba(0,0,0,0.8);
+            margin-bottom: 20px;
+            object-fit: cover;
+        }
+
+        h1 { font-size: 1.5rem; margin: 5px 0; text-transform: uppercase; text-shadow: 2px 2px 5px #000; }
+        .sub { font-size: 0.8rem; letter-spacing: 2px; color: #ff8c00; margin-bottom: 30px; font-weight: bold; }
+
+        .play-btn {
+            width: 90px;
+            height: 90px;
+            background: #ff8c00;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 0 25px rgba(255,140,0,0.5);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.1s ease;
+        }
+        
+        .play-btn:active { transform: scale(0.9); }
         .play-btn i { color: #fff; font-size: 2.5rem; }
+
         .social { display: flex; justify-content: center; gap: 30px; margin-top: 30px; }
         .social a { color: #fff; font-size: 1.8rem; text-decoration: none; }
-        .oscar-vera { font-size: 10px; margin-top: 25px; opacity: 0.8; text-transform: uppercase; }
-        #status { font-size: 11px; margin-bottom: 10px; height: 15px; color: #ff8c00; font-weight: bold; }
+
+        .oscar-vera {
+            font-size: 10px;
+            margin-top: 25px;
+            opacity: 0.8;
+            text-transform: uppercase;
+            line-height: 1.5;
+        }
+
+        #status {
+            font-size: 11px;
+            margin-bottom: 10px;
+            height: 15px;
+            color: #ff8c00;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <div id="status">CONECTAR AHORA</div>
+        <div id="status">PORTAL SAN PEDRO SUR</div>
+        
         <img src="https://i.postimg.cc/RZ1CjTmC/Mesa-de-trabajo-1.png" class="logo">
+        
         <h1>SAN PEDRO SUR</h1>
         <p class="sub">RADIO ONLINE</p>
-        <button class="play-btn" onclick="toggleAudio()"><i class="fas fa-play" id="icon"></i></button>
+
+        <button class="play-btn" onclick="togglePlay()">
+            <i class="fas fa-play" id="iconUI" style="margin-left: 5px;"></i>
+        </button>
+
         <div class="social">
             <a href="https://www.facebook.com/share/1CxK3snQrr/" target="_blank"><i class="fab fa-facebook-f"></i></a>
             <a href="https://www.tiktok.com/@portalsanpedrosurpy" target="_blank"><i class="fab fa-tiktok"></i></a>
             <a href="https://wa.me/595986436870" target="_blank"><i class="fab fa-whatsapp"></i></a>
         </div>
-        <p class="oscar-vera">PORTAL RADIO ONLINE<br>CON OSCAR VERA AL MANDO</p>
+
+        <p class="oscar-vera">
+            PORTAL RADIO ONLINE<br>
+            CON OSCAR VERA AL MANDO
+        </p>
     </div>
 
-    <audio id="radio" crossorigin="anonymous"></audio>
+    <!-- REPRODUCTOR -->
+    <audio id="audioPlayer" preload="none" crossorigin="anonymous"></audio>
 
     <script>
-        var audio = document.getElementById("radio");
-        var icon = document.getElementById("icon");
-        var statusText = document.getElementById("status");
-        var streamUrl = "https://fpsnew1.listen2myradio.com:2199/listen.php?ip=82.145.63.6&port=11054&type=s2&mount=1";
-        var isPlaying = false;
+        const audio = document.getElementById('audioPlayer');
+        const icon = document.getElementById('iconUI');
+        const status = document.getElementById('status');
+        
+        // Nueva URL de Caster.fm
+        const streamUrl = "https://morcast.caster.fm:14697/DHGZf?token=53af68f11fa8c97d354847aa7df48167";
 
-        function toggleAudio() {
-            if (!isPlaying) {
-                playRadio();
+        function togglePlay() {
+            if (audio.paused) {
+                status.innerText = "SINTONIZANDO...";
+                
+                // Forzamos la URL para evitar cortes
+                audio.src = streamUrl;
+                audio.load();
+                
+                audio.play().then(() => {
+                    status.innerText = "🔴 EN VIVO";
+                    icon.className = "fas fa-pause";
+                    icon.style.marginLeft = "0px";
+                }).catch(err => {
+                    status.innerText = "SERVIDOR DESCONECTADO";
+                    console.error("Error:", err);
+                });
             } else {
-                stopRadio();
+                audio.pause();
+                audio.src = ""; // Detiene la descarga de datos
+                status.innerText = "RADIO DETENIDA";
+                icon.className = "fas fa-play";
+                icon.style.marginLeft = "5px";
             }
         }
 
-        function playRadio() {
-            statusText.innerText = "SINTONIZANDO...";
-            audio.src = streamUrl + "&t=" + new Date().getTime();
-            audio.load();
-            
-            audio.play().then(() => {
-                isPlaying = true;
-                icon.className = "fas fa-pause";
-                statusText.innerText = "🔴 EN VIVO";
-            }).catch(err => {
-                statusText.innerText = "REINTENTANDO...";
-                setTimeout(playRadio, 2000);
-            });
-        }
-
-        function stopRadio() {
-            audio.pause();
-            audio.src = ""; // Corta la conexión de datos
-            isPlaying = false;
-            icon.className = "fas fa-play";
-            statusText.innerText = "RADIO DETENIDA";
-        }
-
-        // --- SCRIPT ANTI-SILENCIO (SOLUCIÓN AL PROBLEMA) ---
-        audio.ontimeupdate = function() {
-            // Si el audio está "reproduciendo" pero el tiempo no avanza, reconectar
-            if(isPlaying && audio.paused) {
-                console.log("Detectado silencio o corte. Reconectando...");
-                playRadio();
-            }
-        };
-
-        // Si hay error de red, reiniciar automáticamente
+        // Si el servidor corta la conexión, reintentar automáticamente
         audio.onerror = function() {
-            if(isPlaying) {
-                statusText.innerText = "RECUPERANDO SEÑAL...";
-                playRadio();
+            if(!audio.paused) {
+                status.innerText = "RECUPERANDO SEÑAL...";
+                setTimeout(togglePlay, 2000);
             }
         };
     </script>
+
 </body>
 </html>
