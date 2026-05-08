@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
+    <!-- CONFIGURACIÓN PARA REDES SOCIALES -->
+    <title>SAN PEDRO SUR - PORTAL RADIO ONLINE</title>
+    <meta property="og:title" content="SAN PEDRO SUR - RADIO ONLINE">
+    <meta property="og:description" content="PORTAL SAN PEDRO SUR RADIO ONLINE TE COMUNICA CON OSCAR VERA AL MANDO">
+    <meta property="og:image" content="https://i.postimg.cc/RZ1CjTmC/Mesa-de-trabajo-1.png">
+    <meta property="og:type" content="website">
+    
+    <link rel="shortcut icon" href="https://i.postimg.cc/RZ1CjTmC/Mesa-de-trabajo-1.png" type="image/x-icon">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            /* FONDO DEGRADADO QUE COMBINA CON EL NARANJA */
+            background: radial-gradient(circle at center, #d35400 0%, #000000 100%);
+            color: #fff;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .bg-pattern {
+            position: fixed;
+            inset: 0;
+            background-image: url('https://www.transparenttextures.com/patterns/asfalt-dark.png');
+            opacity: 0.2;
+            z-index: -1;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 350px;
+            text-align: center;
+            z-index: 10;
+            padding: 20px;
+        }
+
+        .logo-box {
+            width: 270px;
+            height: 270px;
+            object-fit: cover;
+            border-radius: 12px;
+            border: 5px solid #ff8c00;
+            margin: 0 auto 20px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+            display: block;
+        }
+
+        h1 {
+            font-size: 1.6rem;
+            font-weight: 900;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+        }
+
+        .subtitle {
+            font-size: 0.8rem;
+            font-weight: 400;
+            letter-spacing: 3px;
+            color: #fff;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            opacity: 0.9;
+        }
+
+        .play-btn {
+            width: 85px;
+            height: 85px;
+            background: #ff8c00;
+            border: none;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            margin-bottom: 30px;
+            box-shadow: 0 0 30px rgba(255, 140, 0, 0.4);
+            transition: transform 0.1s ease;
+        }
+
+        .play-btn:active { transform: scale(0.9); }
+        .play-btn i { color: #fff; font-size: 2.2rem; }
+        .icon-play { margin-left: 6px; }
+
+        .social-menu {
+            display: flex;
+            justify-content: center;
+            gap: 35px;
+            margin-bottom: 25px;
+        }
+
+        .social-menu a {
+            color: #fff;
+            font-size: 1.8rem;
+            text-decoration: none;
+            transition: 0.2s;
+        }
+
+        .social-menu a:active { color: #ff8c00; }
+
+        .info-oscar {
+            font-size: 0.65rem;
+            color: rgba(255,255,255,0.7);
+            line-height: 1.4;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 400;
+        }
+
+        #status {
+            font-size: 0.7rem;
+            margin-bottom: 10px;
+            color: #ff8c00;
+            font-weight: bold;
+            height: 15px;
+            text-shadow: 1px 1px 2px #000;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-pattern"></div>
+
+    <div class="container">
+        <div id="status"></div>
+        
+        <img src="https://i.postimg.cc/RZ1CjTmC/Mesa-de-trabajo-1.png" class="logo-box" alt="Radio Logo">
+        
+        <h1>SAN PEDRO SUR</h1>
+        <p class="subtitle">PORTAL RADIO ONLINE</p>
+
+        <button class="play-btn" id="btnToggle">
+            <i class="fas fa-play icon-play" id="iconUI"></i>
+        </button>
+
+        <div class="social-menu">
+            <a href="https://www.facebook.com/share/1CxK3snQrr/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.tiktok.com/@portalsanpedrosurpy" target="_blank"><i class="fab fa-tiktok"></i></a>
+            <a href="https://wa.me/595986436870" target="_blank"><i class="fab fa-whatsapp"></i></a>
+        </div>
+
+        <p class="info-oscar">
+            PORTAL SAN PEDRO SUR RADIO ONLINE <br>
+            TE COMUNICA CON OSCAR VERA AL MANDO
+        </p>
+    </div>
+
+    <audio id="player" src="https://uk24freenew.listen2myradio.com/live.mp3?typeportmount=s2_24125_stream_796574981" crossorigin="anonymous"></audio>
+
+    <script>
+        const audio = document.getElementById('player');
+        const btn = document.getElementById('btnToggle');
+        const icon = document.getElementById('iconUI');
+        const status = document.getElementById('status');
+        const streamUrl = "https://uk24freenew.listen2myradio.com/live.mp3?typeportmount=s2_24125_stream_796574981";
+
+        btn.onclick = () => {
+            if (audio.paused) {
+                status.innerText = "CONECTANDO...";
+                audio.play().then(() => {
+                    status.innerText = "EN VIVO";
+                    icon.className = 'fas fa-pause';
+                    icon.classList.remove('icon-play');
+                }).catch(() => { status.innerText = "ERROR DE SEÑAL"; });
+            } else {
+                audio.pause();
+                audio.src = streamUrl;
+                icon.className = 'fas fa-play icon-play';
+                status.innerText = "";
+            }
+        };
+    </script>
+</body>
+</html>
