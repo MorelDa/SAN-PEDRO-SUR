@@ -1,459 +1,460 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
-    <!-- VIEWPORT PWA FIX -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>PORTAL SAN PEDRO SUR - En Vivo</title>
 
-    <title>PORTAL SAN PEDRO  - En Vivo</title>
+<meta property="og:title" content="PORTAL SAN PEDRO SUR">
+<meta property="og:description" content="tu Radio online 🔥🎶">
+<meta property="og:image" content="https://i.ibb.co/NdfHrzzK/Airbrush-BG-CHANGER-1775689938420-jpg.png">
+<meta property="og:type" content="website">
 
-    <!-- FAVICON -->
-    <link rel="icon" href="https://i.ibb.co/NdfHrzzK/Airbrush-BG-CHANGER-1775689938420-jpg.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="San Pedro Sur">
+<link rel="apple-touch-icon" href="https://i.ibb.co/NdfHrzzK/Airbrush-BG-CHANGER-1775689938420-jpg.png">
 
-    <!-- PWA MANIFEST -->
-    <link rel="manifest" href="manifest.json">
+<link rel="icon" href="https://i.ibb.co/NdfHrzzK/Airbrush-BG-CHANGER-1775689938420-jpg.png">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <!-- OPEN GRAPH (COMPARTIR CON IMAGEN) -->
-    <meta property="og:title" content="PORTAL SAN PEDRO SUR">
-    <meta property="og:description" content="TU RADIO ONLINE PORTAL SAN PEDRO SUR 🔥">
-    <meta property="og:image" content="https://i.ibb.co/NdfHrzzK/Airbrush-BG-CHANGER-1775689938420-jpg.png">
-    <meta property="og:type" content="website">
+<link rel="manifest" href="manifest.json">
 
-    <meta name="theme-color" content="#e65c00">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-capable" content="yes">
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+body{
+background:#0f0f11;
+display:flex;
+justify-content:center;
+align-items:center;
+min-height:100vh;
+min-height:100dvh;
+overflow:hidden;
+}
 
-    <style>
+.player-container{
+width:100vw;
+max-width:430px;
+height:100vh;
+height:100dvh;
+background-color:#ffffff;
+position:relative;
+overflow:hidden;
+box-shadow:0 20px 50px rgba(0,0,0,0.5);
+padding-top:env(safe-area-inset-top);
+padding-bottom:env(safe-area-inset-bottom);
+}
 
-        *{
-            margin:0;
-            padding:0;
-            box-sizing:border-box;
-            font-family:'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-        }
+/* LOGO */
+.top-logo{
+position:absolute;
+top:18px;
+left:50%;
+transform:translateX(-50%);
+z-index:10;
+}
 
-        body{
-            background:#0f0f11;
-            display:flex;
-            justify-content:center;
-            align-items:center;
-            height:100vh;
-            overflow:hidden;
-        }
+.top-logo img{
+width:82px;
+object-fit:contain;
+}
 
-        .player-container{
-            width:100%;
-            max-width:430px;
-            height:100vh;
-            background-color:#ffffff;
-            position:relative;
-            overflow:hidden;
-            box-shadow:0 20px 50px rgba(0,0,0,0.5);
-        }
+/* CONTROLES DE LA APP ARRIBA (COMPARTIR E INSTALAR) */
+.top-app-controls {
+position:absolute;
+top:15px;
+right:15px;
+z-index:100;
+display:flex;
+gap:8px;
+align-items:center;
+}
 
-        /* LOGO */
-        .top-logo{
-            position:absolute;
-            top:18px;
-            left:50%;
-            transform:translateX(-50%);
-            z-index:10;
-        }
+.btn-top-pwa {
+background: #111113;
+color: white;
+padding: 8px 12px;
+border-radius: 20px;
+font-size: 11px;
+font-weight: bold;
+display: flex;
+align-items: center;
+gap: 6px;
+box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+cursor: pointer;
+border: 1px solid rgba(255,255,255,0.1);
+}
 
-        .top-logo img{
-            width:82px;
-        }
+#pwa-install-banner {
+display: none; /* Se muestra solo si es instalable */
+}
 
-        /* LOCUTOR */
-        .locutor-wrap{
-            position:absolute;
-            bottom:0;
-            left:0;
-            width:100%;
-            height:100%;
-            z-index:1;
-            display:flex;
-            justify-content:center;
-            align-items:flex-end;
-            perspective:1200px;
-        }
+/* LOCUTOR */
+.locutor-wrap{
+position:absolute;
+bottom:0;
+left:0;
+width:100%;
+height:100%;
+z-index:1;
+display:flex;
+justify-content:center;
+align-items:flex-end;
+perspective:1200px;
+}
 
-        .locutor-slider{
-            position:relative;
-            width:120%;
-            height:98%;
-            transform-style:preserve-3d;
-            transition:transform 1.4s ease-in-out;
-        }
+.locutor-slider{
+position:relative;
+width:120%;
+height:100%;
+transform-style:preserve-3d;
+transition:transform 1.4s ease-in-out;
+}
 
-        .locutor-slider.rotate{
-            transform:rotateY(180deg);
-        }
+.locutor-slider.rotate{
+transform:rotateY(180deg);
+}
 
-        .locutor-face{
-            position:absolute;
-            width:100%;
-            height:100%;
-            backface-visibility:hidden;
-            display:flex;
-            justify-content:center;
-            align-items:flex-end;
-        }
+.locutor-face{
+position:absolute;
+width:100%;
+height:100%;
+backface-visibility:hidden;
+display:flex;
+justify-content:center;
+align-items:flex-end;
+}
 
-        .locutor-face img{
-            width:100%;
-            height:100%;
-            object-fit:contain;
-            object-position:center bottom;
-            transform: translateY(-60px);
-        }
+.locutor-face img{
+width:100%;
+height:100%;
+object-fit:contain;
+object-position:center bottom;
+transform: translateY(-25px);
+}
 
-        .front{ transform:rotateY(0deg); }
-        .back{ transform:rotateY(180deg); }
+.front{transform:rotateY(0deg);}
+.back{transform:rotateY(180deg);}
 
-        /* ONDA */
-        .wave-bottom{
-            position:absolute;
-            bottom:0;
-            left:0;
-            width:100%;
-            height:48%;
-            z-index:2;
-            pointer-events:none;
-        }
+/* ONDA */
+.wave-bottom{
+position:absolute;
+bottom:0;
+left:0;
+width:100%;
+height:48%;
+z-index:2;
+pointer-events:none;
+}
 
-        /* UI */
-        .ui-content{
-            position:absolute;
-            bottom:55px;
-            left:0;
-            width:100%;
-            height:46%;
-            z-index:3;
-            display:flex;
-            flex-direction:column;
-            align-items:center;
-            padding:0 24px 35px 24px;
-            justify-content:flex-end;
-        }
+/* UI CONTENT CONTAINER */
+.ui-content{
+position:absolute;
+bottom:calc(45px + env(safe-area-inset-bottom));
+left:0;
+width:100%;
+height:100%;
+z-index:3;
+display:flex;
+flex-direction:column;
+align-items:center;
+padding:0 24px 25px 24px;
+box-sizing: border-box;
+}
 
-        .player-group{
-            width:100%;
-            display:flex;
-            flex-direction:column;
-            align-items:center;
-            margin-bottom:8px;
-        }
+/* PLAYER GROUP */
+.player-group{
+width:100%;
+display:flex;
+flex-direction:column;
+align-items:center;
+position: absolute;
+bottom: 165px;
+}
 
-        .status-badge{
-            background:white;
-            padding:5px 14px;
-            border-radius:20px 20px 0 0;
-            font-size:10px;
-            font-weight:bold;
-            color:#000;
-            display:flex;
-            align-items:center;
-            gap:6px;
-            margin-bottom:-1px;
-            z-index:5;
-        }
+.status-badge{
+background:white;
+padding:5px 14px;
+border-radius:20px 20px 0 0;
+font-size:10px;
+font-weight:bold;
+color:#000;
+display:flex;
+align-items:center;
+gap:6px;
+margin-bottom:-1px;
+z-index:5;
+}
 
-        .live-dot{
-            width:7px;
-            height:7px;
-            background:#ff0000;
-            border-radius:50%;
-            animation:pulse 1.5s infinite;
-        }
+.live-dot{
+width:7px;
+height:7px;
+background:#ff0000;
+border-radius:50%;
+animation:pulse 1.5s infinite;
+}
 
-        .black-player-bar{
-            width:76%;
-            height:76px;
-            background:#111113;
-            border-radius:38px;
-            display:flex;
-            align-items:center;
-            padding:0 16px;
-            color:white;
-            box-shadow:0 10px 25px rgba(0,0,0,0.3);
-        }
+/* BARRA NEGRA */
+.black-player-bar{
+width:76%;
+height:76px;
+background:#111113;
+border-radius:38px;
+display:flex;
+align-items:center;
+padding:0 16px;
+color:white;
+box-shadow:0 10px 25px rgba(0,0,0,0.3);
+}
 
-        .station-avatar{
-            width:44px;
-            height:44px;
-            background:#1e1e22;
-            border-radius:50%;
-            margin-right:10px;
-            display:flex;
-            justify-content:center;
-            align-items:center;
-            overflow:hidden;
-        }
+.station-avatar{
+width:44px;
+height:44px;
+background:#1e1e22;
+border-radius:50%;
+margin-right:10px;
+display:flex;
+justify-content:center;
+align-items:center;
+overflow:hidden;
+flex-shrink: 0;
+}
 
-        .station-avatar img{
-            width:32px;
-            height:32px;
-            object-fit:contain;
-        }
+.station-avatar img{
+width:32px;
+height:32px;
+object-fit:contain;
+}
 
-        .track-text{
-            flex:1;
-            overflow:hidden;
-        }
+.track-text{flex:1;overflow:hidden;}
+.track-text .title{font-weight:700;font-size:14px;white-space: nowrap;}
+.track-text .subtitle{color:#8e8e93;font-size:11px;white-space: nowrap;}
 
-        .track-text .title{
-            font-weight:700;
-            font-size:14px;
-        }
+.spectators-tag{
+background:#ffffff;
+color:#000;
+font-size:9px;
+font-weight:800;
+padding:3px 6px;
+border-radius:4px;
+flex-shrink: 0;
+}
 
-        .track-text .subtitle{
-            color:#8e8e93;
-            font-size:11px;
-        }
+/* TITULO */
+.branding-text{
+position: absolute;
+bottom: 95px;
+text-align:center;
+color:white;
+width: 100%;
+padding: 0 20px;
+}
 
-        .spectators-tag{
-            background:#ffffff;
-            color:#000;
-            font-size:9px;
-            font-weight:800;
-            padding:2px 5px;
-            border-radius:4px;
-        }
+.branding-text h1{
+font-size:24px;
+font-weight:900;
+text-shadow: 0 2px 4px rgba(0,0,0,0.6);
+}
 
-        .branding-text{
-            text-align:center;
-            color:white;
-            margin-bottom:25px;
-        }
+.branding-text p{
+font-size:14px;
+opacity:0.85;
+}
 
-        .branding-text h1{
-            font-size:24px;
-            font-weight:900;
-        }
+/* BOTONES */
+.action-controls{
+position: absolute;
+bottom: 15px;
+display:flex;
+width:100%;
+max-width: 380px;
+justify-content:space-between;
+align-items:center;
+padding:0 10px;
+}
 
-        .branding-text p{
-            font-size:14px;
-            opacity:0.85;
-        }
+.btn-action-play{
+width:84px;
+height:84px;
+background:#ffffff;
+border-radius:50%;
+display:flex;
+justify-content:center;
+align-items:center;
+font-size:32px;
+color:#e65c00;
+border:none;
+box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
 
-        .action-controls{
-            display:flex;
-            width:100%;
-            justify-content:space-between;
-            align-items:center;
-            padding:0 10px;
-        }
+.btn-action-secondary{
+width:62px;
+height:62px;
+background:#111113;
+border-radius:50%;
+color:white;
+display:flex;
+justify-content:center;
+align-items:center;
+font-size:20px;
+border:none;
+box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
 
-        .btn-action-play{
-            width:84px;
-            height:84px;
-            background:#ffffff;
-            border-radius:50%;
-            display:flex;
-            justify-content:center;
-            align-items:center;
-            font-size:32px;
-            color:#e65c00;
-            border:none;
-        }
-
-        .btn-action-secondary{
-            width:62px;
-            height:62px;
-            background:#111113;
-            border-radius:50%;
-            color:white;
-            display:flex;
-            justify-content:center;
-            align-items:center;
-            font-size:20px;
-            border:none;
-        }
-
-        @keyframes pulse{
-            0%{transform:scale(0.9);opacity:1;}
-            50%{transform:scale(1.2);opacity:0.4;}
-            100%{transform:scale(0.9);opacity:1;}
-        }
-
-        /* BOTONES PWA */
-        #installBtn{
-            position:absolute;
-            top:70px;
-            left:50%;
-            transform:translateX(-50%);
-            background:#e65c00;
-            color:white;
-            padding:8px 14px;
-            border-radius:20px;
-            font-size:12px;
-            display:none;
-            z-index:999;
-        }
-
-        #shareBtn{
-            position:absolute;
-            top:120px;
-            right:15px;
-            width:45px;
-            height:45px;
-            border-radius:50%;
-            background:#e65c00;
-            color:white;
-            border:none;
-            z-index:999;
-        }
-
-    </style>
+@keyframes pulse{
+0%{transform:scale(0.9);opacity:1;}
+50%{transform:scale(1.2);opacity:0.4;}
+100%{transform:scale(0.9);opacity:1;}
+}
+</style>
 </head>
 
 <body>
 
-<!-- INSTALL -->
-<div id="installBtn">📲 Instalar App</div>
-
-<!-- SHARE -->
-<button id="shareBtn">
-    <i class="fa-solid fa-share"></i>
-</button>
-
 <div class="player-container">
 
-    <div class="top-logo">
+<div class="top-app-controls">
+  <div class="btn-top-pwa" id="shareBtn">
+    <i class="fa-solid fa-share-nodes"></i> Compartir
+  </div>
+  <div class="btn-top-pwa" id="pwa-install-banner">
+    <i class="fa-solid fa-download"></i> Instalar App
+  </div>
+</div>
+
+<div class="top-logo">
+<img src="https://i.ibb.co/NdfHrzzK/Airbrush-BG-CHANGER-1775689938420-jpg.png">
+</div>
+
+<div class="locutor-wrap">
+<div class="locutor-slider" id="locutorSlider">
+<div class="locutor-face front">
+<img src="https://i.ibb.co/twfjwJLB/primdsbn.png">
+</div>
+<div class="locutor-face back">
+<img src="https://i.ibb.co/fG4PzgN9/878.png">
+</div>
+</div>
+</div>
+
+<svg class="wave-bottom" viewBox="0 0 500 500" preserveAspectRatio="none" style="width:100%; height:48%;">
+<path d="M0,170 C40,185 70,150 180,130 C350,90 400,260 500,200 L500,500 L0,500 Z" fill="#e65c00"></path>
+</svg>
+
+<div class="ui-content">
+
+  <div class="player-group">
+    <div class="status-badge">
+      <span class="live-dot"></span>
+      <span>Sonando Ahora</span>
+    </div>
+    <div class="black-player-bar">
+      <div class="station-avatar">
         <img src="https://i.ibb.co/NdfHrzzK/Airbrush-BG-CHANGER-1775689938420-jpg.png">
+      </div>
+      <div class="track-text">
+        <div class="title">SAN PEDRO SUR</div>
+        <div class="subtitle">RADIO ONLINE</div>
+      </div>
+      <div class="spectators-tag">
+        <i class="fa-solid fa-user"></i> 200
+      </div>
     </div>
+  </div>
 
-    <div class="locutor-wrap">
+  <div class="branding-text">
+    <h1>PORTAL SAN PEDRO SUR</h1>
+    <p>CON ESTILO MÚSICAL</p>
+  </div>
 
-        <div class="locutor-slider" id="locutorSlider">
+  <div class="action-controls">
+    <button class="btn-action-play" id="playBtn">
+      <i class="fa-solid fa-play" id="playIcon"></i>
+    </button>
+    <button class="btn-action-secondary" onclick="window.open('https://wa.me/595986436870')">
+      <i class="fa-brands fa-whatsapp"></i>
+    </button>
+    <button class="btn-action-secondary" onclick="window.open('https://tiktok.com/@portalsanpedrosurpy')">
+      <i class="fa-brands fa-tiktok"></i>
+    </button>
+    <button class="btn-action-secondary" onclick="window.open('https://facebook.com/share/1FBX4M51B1/')">
+      <i class="fa-brands fa-facebook"></i>
+    </button>
+  </div>
 
-            <div class="locutor-face front">
-                <img src="https://i.ibb.co/twfjwJLB/primdsbn.png">
-            </div>
-
-            <div class="locutor-face back">
-                <img src="https://i.ibb.co/fG4PzgN9/878.png">
-            </div>
-
-        </div>
-
-    </div>
-
-    <svg class="wave-bottom" viewBox="0 0 500 500" preserveAspectRatio="none">
-        <path d="M0,170 C40,185 70,150 180,130 C350,90 400,260 500,200 L500,500 L0,500 Z" fill="#e65c00"></path>
-    </svg>
-
-    <div class="ui-content">
-
-        <div class="player-group">
-
-            <div class="status-badge">
-                <span class="live-dot"></span>
-                <span>Sonando Ahora</span>
-            </div>
-
-            <div class="black-player-bar">
-
-                <div class="station-avatar">
-                    <img src="https://i.ibb.co/NdfHrzzK/Airbrush-BG-CHANGER-1775689938420-jpg.png">
-                </div>
-
-                <div class="track-text">
-                    <div class="title">SAN PEDRO SUR</div>
-                    <div class="subtitle">RADIO ONLINE</div>
-                </div>
-
-                <div class="spectators-tag">
-                    <i class="fa-solid fa-user"></i> 200
-                </div>
-
-            </div>
-
-        </div>
-
-        <div class="branding-text">
-            <h1>PORTAL SAN PEDRO SUR</h1>
-            <p>CON ESTILO MÚSICAL</p>
-        </div>
-
-        <div class="action-controls">
-
-            <button class="btn-action-play" id="playBtn">
-                <i class="fa-solid fa-play" id="playIcon"></i>
-            </button>
-
-            <button class="btn-action-secondary" onclick="window.open('https://wa.me/595986436870')">
-                <i class="fa-brands fa-whatsapp"></i>
-            </button>
-
-            <button class="btn-action-secondary" onclick="window.open('https://tiktok.com/@portalsanpedrosurpy')">
-                <i class="fa-brands fa-tiktok"></i>
-            </button>
-
-            <button class="btn-action-secondary" onclick="window.open('https://www.facebook.com/share/1FBX4M51B1/')">
-                <i class="fa-brands fa-facebook"></i>
-            </button>
-
-        </div>
-
-    </div>
-
+</div>
 </div>
 
 <script>
-
-/* AUDIO */
 const audio = new Audio("https://miestacion.turadioonline.com.ar/8072/stream");
+let playing=false;
 
-let playing = false;
-
-document.getElementById("playBtn").onclick = async () => {
-    if (!playing) {
-        await audio.play();
-        document.getElementById("playIcon").className = "fa-solid fa-pause";
-    } else {
-        audio.pause();
-        document.getElementById("playIcon").className = "fa-solid fa-play";
-    }
-    playing = !playing;
+document.getElementById("playBtn").onclick=()=>{
+if(!playing){
+audio.play();
+document.getElementById("playIcon").className="fa-solid fa-pause";
+}else{
+audio.pause();
+document.getElementById("playIcon").className="fa-solid fa-play";
+}
+playing=!playing;
 };
 
-/* ROTATE LOCUTOR */
-setInterval(() => {
-    document.getElementById("locutorSlider").classList.toggle("rotate");
-}, 6000);
+setInterval(()=>{
+document.getElementById("locutorSlider").classList.toggle("rotate");
+},6000);
 
-/* SHARE */
-document.getElementById("shareBtn").onclick = async () => {
-    try {
-        await navigator.share({
-            title: "PORTAL SAN PEDRO SUR",
-            text: "TU RADIO ONLINE PORTAL SAN PEDRO SUR 🔥",
-            url: window.location.href
-        });
-    } catch (e) {
-        window.open("https://wa.me/?text=" + encodeURIComponent("PORTAL SAN PEDRO SUR 🔥 " + window.location.href));
-    }
-};
+// REGISTRO DEL SERVICE WORKER
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('sw.js');
+  });
+}
 
-/* PWA INSTALL */
+// DETECTOR DE INSTALACIÓN
 let deferredPrompt;
+const installBanner = document.getElementById('pwa-install-banner');
 
-window.addEventListener("beforeinstallprompt", (e) => {
-    e.preventDefault();
-    deferredPrompt = e;
-    document.getElementById("installBtn").style.display = "block";
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+  installBanner.style.style.display = 'flex'; 
 });
 
-document.getElementById("installBtn").onclick = async () => {
+installBanner.addEventListener('click', async () => {
+  if (deferredPrompt) {
     deferredPrompt.prompt();
-};
+    const { outcome } = await deferredPrompt.userChoice;
+    if (outcome === 'accepted') {
+      installBanner.style.display = 'none';
+    }
+    deferredPrompt = null;
+  }
+});
 
+// FUNCIÓN DE COMPARTIR NATIVA DE DISPOSITIVOS MÓVILES
+document.getElementById('shareBtn').addEventListener('click', async () => {
+  if (navigator.share) {
+    try {
+      await navigator.share({
+        title: 'PORTAL SAN PEDRO SUR',
+        text: 'PORTAL SAN PEDRO SUR - tu Radio online 🔥🎶',
+        url: window.location.href
+      });
+    } catch (err) {
+      console.log('Error al compartir:', err);
+    }
+  } else {
+    alert('Copia el enlace del navegador para compartir.');
+  }
+});
 </script>
-
 </body>
 </html>
