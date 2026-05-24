@@ -425,7 +425,7 @@ const installBanner = document.getElementById('pwa-install-banner');
 window.addEventListener('beforeinstallprompt', (e) => {
   e.preventDefault();
   deferredPrompt = e;
-  installBanner.style.style.display = 'flex'; 
+  installBanner.style.display = 'flex'; 
 });
 
 installBanner.addEventListener('click', async () => {
