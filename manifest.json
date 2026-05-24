@@ -1,0 +1,17 @@
+{
+  "name": "PORTAL SAN PEDRO SUR",
+  "short_name": "San Pedro Sur",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#0f0f11",
+  "theme_color": "#e65c00",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "https://i.ibb.co/NdfHrzzK/Airbrush-BG-CHANGER-1775689938420-jpg.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
