@@ -1,0 +1,31 @@
+{
+  "url_tv": "https://demo.unified-streaming.com/k8s/features/stable/video/tears-of-steel/tears-of-steel.ism/.m3u8",
+  "secciones": [
+    {
+      "nombre": "NOTICIAS",
+      "sub": "Actuales",
+      "items": [
+        { "titulo": "Gran Inauguración", "img": "https://i.ibb.co/Y4xc5xz7/IMAGEN-512-X-512-PORTADA-Y-LOGO.png", "url": "#" }
+      ]
+    },
+    {
+      "nombre": "CONÓCENOS",
+      "sub": "Más",
+      "items": [
+        { "titulo": "Quiénes Somos", "img": "https://i.ibb.co/Y4xc5xz7/IMAGEN-512-X-512-PORTADA-Y-LOGO.png", "url": "#" }
+      ]
+    },
+    {
+      "nombre": "LO MÁS",
+      "sub": "Viral",
+      "items": [
+        { "titulo": "Tema Tendencia 1", "img": "https://i.ibb.co/Y4xc5xz7/IMAGEN-512-X-512-PORTADA-Y-LOGO.png", "url": "#" }
+      ]
+    }
+  ],
+  "redes_pildoras": [
+    { "nombre": "Facebook", "url": "https://facebook.com", "color": "#1877F2", "icon": "fab fa-facebook-f" },
+    { "nombre": "Instagram", "url": "https://instagram.com", "color": "#E1306C", "icon": "fab fa-instagram" },
+    { "nombre": "WhatsApp", "url": "https://whatsapp.com", "color": "#25D366", "icon": "fab fa-whatsapp" }
+  ]
+}
