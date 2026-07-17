@@ -5,12 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     
     <title>PORTAL SAN PEDRO SUR | Oficial</title>
-    <link rel="icon" type="image/png" href="https://i.postimg.cc/qvhbS6zF/Airbrush-BG-CHANGER-1775689938420-png-removebg-preview.png">
+    
+    <!-- PWA & Favicon Config -->
+    <link rel="manifest" href="./manifest.json">
+    <link rel="icon" type="image/png" href="https://i.ibb.co/Y4xc5xz7/IMAGEN-512-X-512-PORTADA-Y-LOGO.png">
+    
+    <!-- iOS / Apple PWA Support -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="San Pedro Sur">
+    <link rel="apple-touch-icon" href="https://i.ibb.co/Y4xc5xz7/IMAGEN-512-X-512-PORTADA-Y-LOGO.png">
 
+    <!-- Meta Tags para Compartir en Redes Sociales (Open Graph / Facebook / WhatsApp) -->
     <meta property="og:title" content="PORTAL SAN PEDRO SUR | Oficial">
-    <meta property="og:description" content="Conectando con el mejor ritmo.">
-    <meta property="og:image" content="https://i.postimg.cc/qvhbS6zF/Airbrush-BG-CHANGER-1775689938420-png-removebg-preview.png">
+    <meta property="og:description" content="Conectando con el mejor ritmo. Escucha nuestra radio en vivo y TV digital.">
+    <meta property="og:image" content="https://i.ibb.co/Y4xc5xz7/IMAGEN-512-X-512-PORTADA-Y-LOGO.png">
     <meta property="og:type" content="website">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+
+    <!-- Twitter Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="PORTAL SAN PEDRO SUR | Oficial">
+    <meta name="twitter:description" content="Conectando con el mejor ritmo.">
+    <meta name="twitter:image" content="https://i.ibb.co/Y4xc5xz7/IMAGEN-512-X-512-PORTADA-Y-LOGO.png">
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&display=swap" rel="stylesheet">
@@ -216,7 +234,17 @@
         function renderCarousel(sec, idx) {
             return `<div class="mt-16"><h2 class="block-title">${sec.nombre} <span>${sec.sub}</span></h2><div class="swiper s-${idx} !overflow-visible"><div class="swiper-wrapper">${sec.items.map(i => `<div class="swiper-slide" style="width:220px"><div class="card"><a href="${i.url}" target="_blank"><img src="${i.img}"><p class="mt-3 text-center text-[11px] font-bold uppercase truncate">${i.titulo}</p></a></div></div>`).join('')}</div></div></div>`;
         }
+        
         window.onload = loadData;
+
+        // REGISTRO DEL SERVICE WORKER (PWA)
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js')
+                    .then(reg => console.log('PWA Service Worker registrado con éxito', reg))
+                    .catch(err => console.error('Error al registrar el Service Worker', err));
+            });
+        }
     </script>
 </body>
 </html>
