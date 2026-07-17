@@ -1,14 +1,15 @@
 {
-  "name": "PORTAL SAN PEDRO SUR",
+  "name": "Portal San Pedro Sur",
   "short_name": "San Pedro Sur",
-  "start_url": "index.html",
+  "description": "Conectando con el mejor ritmo.",
+  "start_url": "./index.html",
   "display": "standalone",
-  "background_color": "#0f0f11",
-  "theme_color": "#e65c00",
-  "orientation": "portrait",
+  "background_color": "#0d0d0d",
+  "theme_color": "#ff7300",
+  "orientation": "portrait-primary",
   "icons": [
     {
-      "src": "https://i.ibb.co/NdfHrzzK/Airbrush-BG-CHANGER-1775689938420-jpg.png",
+      "src": "https://i.ibb.co/Y4xc5xz7/IMAGEN-512-X-512-PORTADA-Y-LOGO.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
