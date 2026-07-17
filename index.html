@@ -3,55 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    
     <title>PORTAL SAN PEDRO SUR | Oficial</title>
     
-    <!-- PWA & Favicon Config -->
+    <!-- Configuración PWA -->
     <link rel="manifest" href="./manifest.json">
-    <link rel="icon" type="image/png" href="https://i.ibb.co/Y4xc5xz7/IMAGEN-512-X-512-PORTADA-Y-LOGO.png">
-    
-    <!-- iOS / Apple PWA Support -->
+    <link rel="icon" type="image/png" href="https://i.postimg.cc/qvhbS6zF/Airbrush-BG-CHANGER-1775689938420-png-removebg-preview.png">
+    <link rel="apple-touch-icon" href="https://i.ibb.co/Y4xc5xz7/IMAGEN-512-X-512-PORTADA-Y-LOGO.png">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="San Pedro Sur">
-    <link rel="apple-touch-icon" href="https://i.ibb.co/Y4xc5xz7/IMAGEN-512-X-512-PORTADA-Y-LOGO.png">
-
-    <!-- Meta Tags para Compartir en Redes Sociales (Open Graph / Facebook / WhatsApp) -->
-    <meta property="og:title" content="PORTAL SAN PEDRO SUR | Oficial">
-    <meta property="og:description" content="Conectando con el mejor ritmo. Escucha nuestra radio en vivo y TV digital.">
-    <meta property="og:image" content="https://i.ibb.co/Y4xc5xz7/IMAGEN-512-X-512-PORTADA-Y-LOGO.png">
-    <meta property="og:type" content="website">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
-
-    <!-- Twitter Meta Tags -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="PORTAL SAN PEDRO SUR | Oficial">
-    <meta name="twitter:description" content="Conectando con el mejor ritmo.">
-    <meta name="twitter:image" content="https://i.ibb.co/Y4xc5xz7/IMAGEN-512-X-512-PORTADA-Y-LOGO.png">
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 
     <style>
-        :root { --red: #ff7300; --bg: #ffffff; --text: #1a1a1a; --card: #f8f8f8; --border: rgba(0,0,0,0.08); }
-        body.dark-mode { --bg: #0d0d0d; --text: #ffffff; --card: #1a1a1a; --border: rgba(255,255,255,0.1); }
-        
-        body { background: var(--bg); color: var(--text); font-family: 'Montserrat', sans-serif; margin: 0; overflow-x: hidden; -webkit-tap-highlight-color: transparent; transition: 0.3s; }
+        :root { --red: #ff7300; }
+        body { background: #000; color: #fff; font-family: 'Montserrat', sans-serif; margin: 0; overflow: hidden; }
         
         /* HERO */
         .hero { 
             width: 100%; height: 85vh; position: relative; overflow: hidden;
             mask-image: linear-gradient(to bottom, black 90%, transparent 100%); 
             -webkit-mask-image: linear-gradient(to bottom, black 90%, transparent 100%); 
-            background: #000;
         }
         .hero video { width: 100%; height: 100%; object-fit: cover; }
 
-        /* HEADER */
+        /* HEADER ORIGINAL */
         .header-main { 
             position: relative; 
             margin-top: -240px; 
@@ -59,7 +36,6 @@
             display: flex; flex-direction: row; align-items: center; 
             justify-content: space-between; z-index: 100; width: 100%; box-sizing: border-box;
         }
-
         .main-title { 
             font-weight: 900; text-transform: uppercase; line-height: 0.85; 
             font-size: 26px; letter-spacing: -1px; flex: 1;
@@ -67,7 +43,6 @@
             color: white;
             padding-right: 10px;
         }
-        
         .heart-box { 
             width: 115px; height: 115px; border-radius: 1.8rem; 
             border: 4px solid white; box-shadow: 0 10px 30px rgba(0,0,0,0.5); 
@@ -75,22 +50,8 @@
             display: flex; align-items: center; justify-content: center;
         }
         .heart-box img { width: 100%; height: 100%; object-fit: contain; }
-        
-        @media (min-width: 1024px) { 
-            .hero { height: 90vh; }
-            .header-main { margin-top: -320px; max-width: 1200px; margin-left: auto; margin-right: auto; padding: 0; } 
-            .heart-box { width: 350px; height: 350px; border-radius: 5rem; border: 15px solid white; } 
-            .main-title { font-size: 75px; }
-        }
 
-        .block-title { font-size: 24px; font-weight: 900; text-transform: uppercase; margin-bottom: 30px; text-align: center; width: 100%; }
-        .block-title span { color: var(--red); }
-        .block-title::after { content: ''; display: block; width: 50px; height: 4px; background: var(--red); margin: 8px auto 0; border-radius: 10px; }
-
-        .card { background: var(--card); border-radius: 1.8rem; padding: 12px; border: 1px solid var(--border); }
-        .card img { border-radius: 1.5rem; width: 100%; aspect-ratio: 1/1; object-fit: cover; }
-
-        /* NUEVO REPRODUCTOR PREMIUM MÁS ESTILIZADO */
+        /* REPRODUCTOR FLOTANTE PREMIUM */
         .player-bar { 
             position: fixed; 
             bottom: 20px; left: 5%; right: 5%;
@@ -98,7 +59,6 @@
             margin: 0 auto;
             background: rgba(20, 20, 20, 0.85); 
             backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
             padding: 12px 20px; 
             z-index: 5000; 
             display: flex; align-items: center; justify-content: space-between; 
@@ -107,7 +67,6 @@
             box-shadow: 0 15px 35px rgba(0,0,0,0.6);
             color: white; 
         }
-        
         .play-btn-circle {
             background: var(--red);
             width: 50px; height: 50px;
@@ -115,19 +74,19 @@
             display: flex; align-items: center; justify-content: center;
             font-size: 18px;
             cursor: pointer;
-            transition: transform 0.2s ease, background 0.2s ease;
-            box-shadow: 0 4px 15px rgba(255, 115, 0, 0.4);
+            transition: transform 0.2s ease;
         }
-        .play-btn-circle:active {
-            transform: scale(0.95);
+        .play-btn-circle:active { transform: scale(0.95); }
+
+        @media (min-width: 1024px) { 
+            .hero { height: 90vh; }
+            .header-main { margin-top: -320px; max-width: 1200px; margin-left: auto; margin-right: auto; } 
+            .heart-box { width: 350px; height: 350px; border-radius: 5rem; border: 15px solid white; } 
+            .main-title { font-size: 75px; }
         }
     </style>
 </head>
-<body class="dark-mode">
-
-    <button id="mode-btn" style="position:fixed; top:20px; right:20px; z-index:6000; background:var(--red); color:white; width:45px; height:45px; border-radius:50%; border:none; display:flex; align-items:center; justify-content:center; cursor:pointer;">
-        <i class="fas fa-sun" id="mode-icon"></i>
-    </button>
+<body>
 
     <div class="hero">
         <video autoplay muted loop playsinline>
@@ -140,15 +99,10 @@
             PORTAL SAN<br>PEDRO <span class="text-[#ff7300]">SUR.</span>
         </div>
         <div class="heart-box">
-            <img src="https://i.ibb.co/Y4xc5xz7/IMAGEN-512-X-512-PORTADA-Y-LOGO.png" alt="Logo Portal San Pedro Sur">
+            <img src="https://i.ibb.co/Y4xc5xz7/IMAGEN-512-X-512-PORTADA-Y-LOGO.png" alt="Logo">
         </div>
     </header>
 
-    <main id="web-content" class="pt-24 px-4 max-w-7xl mx-auto w-full"></main>
-    
-    <footer class="text-center py-20 pb-40 text-[10px] font-bold opacity-50 uppercase">© 2026 PORTAL SAN PEDRO SUR</footer>
-
-    <!-- BARRA DE REPRODUCTOR REDISEÑADA ESTILO FLOTANTE -->
     <div class="player-bar">
         <div class="flex items-center gap-4">
             <div class="w-12 h-12 rounded-xl overflow-hidden bg-transparent flex items-center justify-center">
@@ -169,7 +123,6 @@
 
     <audio id="main-stream" crossorigin="anonymous"></audio>
 
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
         const audio = document.getElementById('main-stream');
         const playBtn = document.getElementById('play-btn');
@@ -178,7 +131,7 @@
         playBtn.onclick = () => {
             if (audio.paused) { 
                 audio.src = streamUrl + "?t=" + Date.now(); 
-                audio.play().catch(err => console.log("Streaming error:", err)); 
+                audio.play(); 
                 document.getElementById('play-icon').className = 'fas fa-pause'; 
             } else { 
                 audio.pause(); 
@@ -187,63 +140,8 @@
             }
         };
 
-        document.getElementById('mode-btn').onclick = () => {
-            document.body.classList.toggle('dark-mode');
-            document.getElementById('mode-icon').className = document.body.classList.contains('dark-mode') ? 'fas fa-sun' : 'fas fa-moon';
-        };
-
-        async function loadData() {
-            try {
-                const res = await fetch('datos.json?v=' + Math.random());
-                const data = await res.json();
-                let html = '';
-                
-                const secNoticias = data.secciones.find(s => s.nombre === "NOTICIAS");
-                if(secNoticias) html += renderCarousel(secNoticias, 0);
-
-                const secConocenos = data.secciones.find(s => s.nombre === "CONÓCENOS");
-                if(secConocenos) {
-                    html += `<div class="mt-16"><h2 class="block-title">${secConocenos.nombre} <span>${secConocenos.sub}</span></h2><div class="swiper s-conocenos !overflow-visible"><div class="swiper-wrapper">${secConocenos.items.map(i => `<div class="swiper-slide" style="width:220px"><div class="card"><a href="${i.url}" target="_blank"><img src="${i.img}"><p class="mt-3 text-center text-[11px] font-bold uppercase truncate">${i.titulo}</p></a></div></div>`).join('')}</div></div></div>`;
-                }
-
-                if (data.url_tv) {
-                    html += `<div class="mt-20"><h2 class="block-title">TV EN <span>VIVO</span></h2><div class="card overflow-hidden bg-black !p-0 aspect-video"><video id="tv-player" class="w-full h-full" controls playsinline></video></div></div>`;
-                }
-
-                html += `<div class="mt-20 text-center"><h2 class="block-title">Nuestras <span>Redes</span></h2><div class="flex flex-wrap justify-center gap-4 mt-6">${data.redes_pildoras.map(r => `<a href="${r.url}" target="_blank" class="px-8 py-3 rounded-full text-white font-bold uppercase text-[10px]" style="background:${r.color}; display:flex; align-items:center; gap:8px;"><i class="${r.icon}"></i> ${r.nombre}</a>`).join('')}</div></div>`;
-
-                const secViral = data.secciones.find(s => s.nombre === "LO MÁS");
-                if(secViral) html += renderCarousel(secViral, 1);
-
-                document.getElementById('web-content').innerHTML = html;
-
-                if (data.url_tv) {
-                    const video = document.getElementById('tv-player');
-                    if (Hls.isSupported()) { const hls = new Hls(); hls.loadSource(data.url_tv); hls.attachMedia(video); }
-                    else if (video.canPlayType('application/vnd.apple.mpegurl')) { video.src = data.url_tv; }
-                }
-
-                const swConfig = { slidesPerView: 'auto', spaceBetween: 15, freeMode: { enabled: true, sticky: false, momentum: true, momentumRatio: 1.5, momentumVelocityRatio: 1 }, grabCursor: true };
-                new Swiper('.s-0', swConfig);
-                new Swiper('.s-1', swConfig);
-                new Swiper('.s-conocenos', swConfig);
-
-            } catch (e) { console.error(e); }
-        }
-
-        function renderCarousel(sec, idx) {
-            return `<div class="mt-16"><h2 class="block-title">${sec.nombre} <span>${sec.sub}</span></h2><div class="swiper s-${idx} !overflow-visible"><div class="swiper-wrapper">${sec.items.map(i => `<div class="swiper-slide" style="width:220px"><div class="card"><a href="${i.url}" target="_blank"><img src="${i.img}"><p class="mt-3 text-center text-[11px] font-bold uppercase truncate">${i.titulo}</p></a></div></div>`).join('')}</div></div></div>`;
-        }
-        
-        window.onload = loadData;
-
-        // REGISTRO DEL SERVICE WORKER (PWA)
         if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('./sw.js')
-                    .then(reg => console.log('PWA Service Worker registrado con éxito', reg))
-                    .catch(err => console.error('Error al registrar el Service Worker', err));
-            });
+            navigator.serviceWorker.register('./sw.js');
         }
     </script>
 </body>
